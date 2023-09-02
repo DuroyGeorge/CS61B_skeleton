@@ -31,4 +31,42 @@ public class Planet {
         double r=calcDistance(p);
         return (mass*p.mass/(r*r))*G;
     }
+    public double calcForceExertedByX(Planet p){
+        double dx=p.xxPos-xxPos;
+        double r=calcDistance(p);
+        double f=calcForceExertedBy(p);
+        return f*dx/r;
+    }
+    public double calcForceExertedByY(Planet p){
+        double dy=p.yyPos-yyPos;
+        double r=calcDistance(p);
+        double f=calcForceExertedBy(p);
+        return f*dy/r;
+    }
+    public double calcNetForceExertedByX(Planet[] allPlanets){
+        double netForceX=0;
+        for(Planet p:allPlanets){
+            if(!this.equals(p)){
+                netForceX+=calcForceExertedByX(p);
+            }
+        }
+        return netForceX;
+    }
+    public double calcNetForceExertedByY(Planet[] allPlanets){
+        double netForceY=0;
+        for(Planet p:allPlanets){
+            if(!this.equals(p)){
+                netForceY+=calcForceExertedByY(p);
+            }
+        }
+        return netForceY;
+    }
+    public void update(double dt,double fX,double fY){
+        double aX=fX/mass;
+        double aY=fY/mass;
+        xxVel+=aX*dt;
+        yyVel+=aY*dt;
+        xxPos+=xxVel*dt;
+        yyPos+=yyVel*dt;
+    }
 }
