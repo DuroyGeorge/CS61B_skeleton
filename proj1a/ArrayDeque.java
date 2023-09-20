@@ -24,7 +24,7 @@ public class ArrayDeque<T> {
     private void resize(int newCapacity) {
         T[] newItems = (T[]) new Object[newCapacity];
         int p = (head - 1 + capacity) % capacity;
-        for (int i = 0; i < size; i++) {
+        for (int i = size - 1; i >= 0; i--) {
             newItems[i] = items[p];
             p = (p - 1 + capacity) % capacity;
         }
@@ -98,6 +98,6 @@ public class ArrayDeque<T> {
         if (index >= size || index < 0) {
             return null;
         }
-        return items[(head - index + capacity) % capacity];
+        return items[(head - index - 1 + capacity) % capacity];
     }
 }
