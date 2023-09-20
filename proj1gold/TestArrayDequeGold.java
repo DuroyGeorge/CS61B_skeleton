@@ -10,15 +10,16 @@ public class TestArrayDequeGold {
         Integer maxTime = 500;
         ArrayDequeSolution<Integer> correction = new ArrayDequeSolution<>();
         StudentArrayDeque<Integer> failure = new StudentArrayDeque<>();
-        StringBuilder msg= new StringBuilder();
+        StringBuilder msg = new StringBuilder();
         for (Integer i = 0; i < maxTime; i++) {
             int factor = StdRandom.uniform(0, 4);
             String temp;
+            Integer co, fail;
             switch (factor) {
                 case 0:
                     correction.addFirst(i);
                     failure.addFirst(i);
-                    temp="addFirst(" + i + ")\n";
+                    temp = "addFirst(" + i + ")\n";
                     msg.append(temp);
                     assertEquals(msg.toString(),
                         correction.get(0), failure.get(0));
@@ -26,7 +27,7 @@ public class TestArrayDequeGold {
                 case 1:
                     correction.addLast(i);
                     failure.addLast(i);
-                    temp="addLast(" + i + ")\n";
+                    temp = "addLast(" + i + ")\n";
                     msg.append(temp);
                     assertEquals(msg.toString(),
                         correction.get(correction.size() - 1), failure.get(failure.size() - 1));
@@ -34,15 +35,19 @@ public class TestArrayDequeGold {
                 case 2:
                     if (!correction.isEmpty() && !failure.isEmpty()) {
                         msg.append("removeFirst()\n");
+                        co = correction.removeFirst();
+                        fail = failure.removeFirst();
                         assertEquals(msg.toString(),
-                            correction.removeFirst(), failure.removeFirst());
+                            co, fail);
                     }
                     break;
                 case 3:
                     if (!correction.isEmpty() && !failure.isEmpty()) {
                         msg.append("removeLast()\n");
+                        co = correction.removeLast();
+                        fail = failure.removeLast();
                         assertEquals(msg.toString(),
-                            correction.removeLast(), failure.removeLast());
+                            co, fail);
                     }
                     break;
             }
