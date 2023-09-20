@@ -15,7 +15,7 @@ public class ArrayDeque<T> implements Deque<T> {
   }
 
   @Override
-  private boolean isEmpty() {
+  public boolean isEmpty() {
     return size == 0;
   }
 
